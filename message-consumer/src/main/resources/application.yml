@@ -1,13 +1,11 @@
-greeting:
-  message: "hello"
 mp:
   messaging:
     outgoing:
-      words-out:
-        topic: "words"
+      message-out:
+        topic: "message-out"
     incoming:
-      words-in:
+      message-in:
         auto:
           offset:
             reset: "earliest"
-        topic: "words"
+        topic: "message-in"
