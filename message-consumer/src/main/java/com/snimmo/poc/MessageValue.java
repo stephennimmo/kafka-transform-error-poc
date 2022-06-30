@@ -6,6 +6,9 @@ public class MessageValue {
 
     private String value1;
 
+    public MessageValue() {
+    }
+
     public MessageValue(String value1) {
         this.value1 = value1;
     }

@@ -1,7 +1,9 @@
 package com.snimmo.poc;
 
-import io.smallrye.reactive.messaging.kafka.Record;
-import org.eclipse.microprofile.reactive.messaging.*;
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.eclipse.microprofile.reactive.messaging.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

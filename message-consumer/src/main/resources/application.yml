@@ -1,11 +1,24 @@
+quarkus:
+  log:
+    level: DEBUG
+
+
 mp:
   messaging:
     outgoing:
       message-out:
         topic: "message-out"
+        key:
+          serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer
+        value:
+          serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer
     incoming:
       message-in:
         auto:
           offset:
             reset: "earliest"
         topic: "message-in"
+        key:
+          deserializer: com.snimmo.poc.MessageKeyDeserializer
+        value:
+          deserializer: com.snimmo.poc.MessageValueDeserializer
