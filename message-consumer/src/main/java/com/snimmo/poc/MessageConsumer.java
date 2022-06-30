@@ -21,11 +21,16 @@ public class MessageConsumer {
     @Channel("message-out")
     Emitter<MessageValue> messageOutEmitter;
 
+    @Inject
+    TransformationService transformationService;
+
     @Incoming("message-in")
     public CompletionStage<Void> handleMessage(Message<MessageValue> in) {
-        log.info(in.getMetadata().toString());
-        if (!Objects.equals(in.getPayload().getValue1(), "FAIL")) {
+        try {
+            MessageValue transformed = transformationService.transform(in.getPayload());
             messageOutEmitter.send(in);
+        } catch (TransformationException e) {
+            log.error("Transformation failed");
         }
         return in.ack();
     }

@@ -28,6 +28,9 @@ public class ReprocessResource {
     @Inject
     MessageConsumer messageConsumer;
 
+    @Inject
+    TransformationService transformationService;
+
     @POST
     public Response reprocess(ReprocessRequest reprocessRequest) {
         TopicPartition topicPartition = new TopicPartition("message-in", reprocessRequest.getPartition());
@@ -42,6 +45,13 @@ public class ReprocessResource {
                 .withKey(messageKey)
                 .build();
         messageConsumer.handleMessage(Message.of(messageValue).addMetadata(metadata));
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/flag")
+    public Response flag(boolean newFlag) {
+        this.transformationService.setFail(newFlag);
         return Response.ok().build();
     }
 
